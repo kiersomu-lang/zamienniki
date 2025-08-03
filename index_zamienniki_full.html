@@ -1,0 +1,93 @@
+
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <title>Zamienniki nici</title>
+</head>
+<body>
+  <h2>Zamienniki nici DMC, Ariadna, Anchor</h2>
+
+  <label>Marka wejściowa:</label>
+  <select id="fromBrand">
+    <option value="dmc">DMC</option>
+    <option value="ariadna">Ariadna</option>
+    <option value="anchor">Anchor</option>
+  </select>
+
+  <label>Marka docelowa:</label>
+  <select id="toBrand">
+    <option value="ariadna">Ariadna</option>
+    <option value="dmc">DMC</option>
+    <option value="anchor">Anchor</option>
+  </select>
+
+  <br><br>
+  <label>Numer koloru:</label>
+  <input id="colorNumber" type="text" />
+  <button onclick="convert()">Szukaj</button>
+
+  <p id="result"></p>
+
+  <script>
+const kolory = [
+  { dmc: "150", ariadna: "1566", anchor: "59" },
+  { dmc: "151", ariadna: "1575", anchor: "24" },
+  { dmc: "152", ariadna: "1748", anchor: "969" },
+  { dmc: "153", ariadna: "1593", anchor: null },
+  { dmc: "154", ariadna: "1584", anchor: "873" },
+  { dmc: "155", ariadna: "1604", anchor: "1030" },
+  { dmc: "156", ariadna: "1608", anchor: "118" },
+  { dmc: "157", ariadna: "1622", anchor: "120" },
+  { dmc: "158", ariadna: "1609", anchor: "178" },
+  { dmc: "159", ariadna: "1632", anchor: null },
+  { dmc: "160", ariadna: "1634", anchor: null },
+  { dmc: "161", ariadna: "1605", anchor: "176" },
+  { dmc: "162", ariadna: "1610", anchor: "159" },
+  { dmc: "163", ariadna: "1666", anchor: "877" },
+  { dmc: "164", ariadna: "1679", anchor: "240" },
+  { dmc: "165", ariadna: "1710", anchor: "278" },
+  { dmc: "166", ariadna: "1711", anchor: "280" },
+  { dmc: "167", ariadna: "1725", anchor: "375" },
+  { dmc: "168", ariadna: "1646", anchor: "274" },
+  { dmc: "169", ariadna: "1815", anchor: "849" },
+  { dmc: "208", ariadna: "1591", anchor: "110" },
+  { dmc: "209", ariadna: "1592", anchor: "109" },
+  { dmc: "210", ariadna: "1597", anchor: "108" },
+  { dmc: "211", ariadna: "1593", anchor: "342" },
+  { dmc: "221", ariadna: "1758", anchor: "897" },
+  { dmc: "223", ariadna: "1577", anchor: "895" },
+  { dmc: "224", ariadna: "1754", anchor: "893" },
+  { dmc: "225", ariadna: "1747", anchor: "1026" },
+  { dmc: "300", ariadna: "1742", anchor: "352" },
+  { dmc: "301", ariadna: "1741", anchor: "1049" },
+  { dmc: "304", ariadna: "1556", anchor: "19" },
+  { dmc: "307", ariadna: "1504", anchor: "289" },
+  { dmc: "309", ariadna: "1563", anchor: "42" },
+  { dmc: "310", ariadna: "1819", anchor: "403" },
+  { dmc: "311", ariadna: "1644", anchor: "148" },
+  { dmc: "312", ariadna: "1625", anchor: "979" },
+  { dmc: "321", ariadna: "1563", anchor: "47" },
+  { dmc: "333", ariadna: "1605", anchor: "119" },
+];
+
+function convert() {
+  const from = document.getElementById("fromBrand").value;
+  const to = document.getElementById("toBrand").value;
+  const number = document.getElementById("colorNumber").value.trim();
+
+  if (from === to) {
+    document.getElementById("result").innerText = "Wybierz różne marki.";
+    return;
+  }
+
+  const match = kolory.find(k => k[from] === number);
+  if (match && match[to]) {
+    document.getElementById("result").innerText = `✅ ${from.toUpperCase()} ${number} → ${to.toUpperCase()} ${match[to]}`;
+  } else {
+    document.getElementById("result").innerText = `❌ Brak zamiennika z ${from.toUpperCase()} ${number} na ${to.toUpperCase()}`;
+  }
+}
+  </script>
+</body>
+</html>
